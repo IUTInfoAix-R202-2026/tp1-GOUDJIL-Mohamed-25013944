@@ -1,6 +1,11 @@
 package fr.univ_amu.iut.exercice4;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 /**
@@ -29,21 +34,39 @@ public class MiseEnPage extends Application {
 
   @Override
   public void start(Stage primaryStage) {
-    // TODO exercice 4 : construire la maquette ci-dessus.
-    //
-    // Stratégie conseillée :
-    //
-    // 1. Un BorderPane comme racine (setTop, setCenter, setBottom).
-    // 2. Top    : un MenuBar avec deux Menu "Fichier" et "Aide".
-    // 3. Center : un GridPane avec 2 lignes / 2 colonnes :
-    //                (0,0) Label "Nom :"     | (1,0) TextField
-    //                (0,1) Label "Email :"   | (1,1) TextField
-    // 4. Bottom : un HBox contenant deux boutons "Valider" et "Annuler",
-    //             avec un peu d'espacement et un padding.
-    //
-    // Donne un id CSS utile sur les composants si tu veux les retrouver
-    // facilement (les tests utilisent lookup sur les classes ".text-field"
-    // et ".button", pas besoin d'id particulier).
+    BorderPane root = new BorderPane();
+
+    MenuBar menuBar = new MenuBar();
+    Menu menuFichier = new Menu("Fichier");
+    Menu menuAide = new Menu("Aide");
+    menuBar.getMenus().addAll(menuFichier, menuAide);
+    root.setTop(menuBar);
+
+    GridPane grid = new GridPane();
+    grid.setHgap(10);
+    grid.setVgap(10);
+    grid.setPadding(new Insets(20));
+
+    grid.add(new Label("Nom :"), 0, 0);
+    grid.add(new TextField(), 1, 0);
+    grid.add(new Label("Email :"), 0, 1);
+    grid.add(new TextField(), 1, 1);
+
+    root.setCenter(grid);
+
+    HBox bottomBox = new HBox(10);
+    bottomBox.setPadding(new Insets(15));
+    bottomBox.setAlignment(Pos.CENTER_RIGHT);
+
+    Button btnValider = new Button("Valider");
+    Button btnAnnuler = new Button("Annuler");
+
+    bottomBox.getChildren().addAll(btnValider, btnAnnuler);
+    root.setBottom(bottomBox);
+
+    Scene scene = new Scene(root, 400, 250);
+    primaryStage.setScene(scene);
+    primaryStage.show();
   }
 
   public static void main(String[] args) {

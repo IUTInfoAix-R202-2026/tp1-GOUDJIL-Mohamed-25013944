@@ -31,7 +31,7 @@ class MiseEnPageTest {
 
   // --- Étape 1 : afficher la fenêtre ---
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void laFenetreEstVisible(FxRobot robot) {
     assertThat(stage.isShowing())
